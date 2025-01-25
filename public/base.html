@@ -1,0 +1,15 @@
+{{ template "header" }}
+{{ if eq "auth" .Title }}
+{{ template "authentication" }}
+{{ else if eq "home" .Title }}
+{{ template "index" }}
+{{ else if eq "parent" .Title }}
+{{ template "parentdashboard" .Data}}
+{{ else if eq "school" .Title }}
+{{ template "schooldashboard" .Data}}
+{{ else if eq "boarding" .Title}}
+{{ template "boarding" .Data }}
+{{ else if eq "error" .Title }}
+{{ template "error" .Data}}
+{{ end }}
+{{ template "footer"}}
