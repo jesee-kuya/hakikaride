@@ -8,8 +8,16 @@ import (
 	"text/template"
 )
 
+var Temp, Err = template.ParseGlob("template/*.html")
+
+type Details struct {
+	Title string
+	Data  any
+}
+
 // ErrorModel defines the structure for error data to pass to the template
 type ErrorModel struct {
+	Title      string
 	ErrMsg     string
 	StatusCode int
 }
@@ -47,13 +55,19 @@ type Boarding struct {
 	Students  []Student
 }
 
+type School struct {
+	Name        string
+	SBoarding   []Boarding
+	AllStudents []Student
+	AllRoutes   []Route
+	AllParents  []Parent
+}
+
 func handleAuth(w http.ResponseWriter, r *http.Request) {
+	var Data Details
 	if r.Method == http.MethodGet {
-		tmpl, err := template.ParseFiles("public/authentication.html")
-		if err != nil {
-			fmt.Println(err)
-		}
-		tmpl.Execute(w, nil)
+		Data.Title = "auth"
+		Temp.ExecuteTemplate(w, "base.html", Data)
 		return
 	}
 	if r.Method != http.MethodPost {
@@ -178,35 +192,36 @@ func handleSignup(w http.ResponseWriter, r *http.Request, userType string) {
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("public/index.html")
-	if err != nil {
-		fmt.Println(err)
-	}
-	tmpl.Execute(w, nil)
+	var home Details
+	home.Title = "home"
+	Temp.ExecuteTemplate(w, "base.html", home)
 }
 
 func handleDashboardParents(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("public/parentsdashboard.html")
-	if err != nil {
-		fmt.Println(err)
-	}
-	tmpl.Execute(w, nil)
+	var pDash Details
+	var parent Parent
+	pDash.Title = "parent"
+	parent.School = "Hekima"
+	pDash.Data = parent
+	Temp.ExecuteTemplate(w, "base.html", pDash)
 }
 
 func handleDashboardSchool(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("public/schooldashboard.html")
-	if err != nil {
-		fmt.Println(err)
-	}
-	tmpl.Execute(w, nil)
+	var sDash Details
+	var school School
+	sDash.Title = "school"
+	school.Name = "Hekima"
+	sDash.Data = school
+	Temp.ExecuteTemplate(w, "base.html", sDash)
 }
 
 func handleBoarding(w http.ResponseWriter, r *http.Request) {
-	tmpl, err := template.ParseFiles("public/boarding.html")
-	if err != nil {
-		fmt.Println(err)
-	}
-	tmpl.Execute(w, nil)
+	var boarding Boarding
+	var details Details
+	boarding.School = "Hekima"
+	details.Title = "boarding"
+	details.Data = boarding
+	Temp.ExecuteTemplate(w, "base.html", details)
 }
 
 // HandleError is a utility to handle errors and render a dynamic error page
@@ -215,22 +230,55 @@ func HandleError(w http.ResponseWriter, errMsg string, statusCode int) {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(statusCode)
 
-	tmpl, err := template.ParseFiles("public/errorPage.html")
-	if err != nil {
-		log.Printf("Error parsing template: %v\n", err)
-		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
-		return
-	}
-
 	// Create the error model with details
 	errorData := ErrorModel{
 		ErrMsg:     errMsg,
 		StatusCode: statusCode,
 	}
 
+	var details Details
+	details.Title = "error"
+	details.Data = errorData
+
 	// Execute the template and write it to the response
-	if err := tmpl.Execute(w, errorData); err != nil {
+	if err := Temp.ExecuteTemplate(w, "base.html", details); err != nil {
 		log.Printf("Error executing template: %v\n", err)
 		http.Error(w, "500 Internal Server Error", http.StatusInternalServerError)
+	}
+}
+
+func Handler(w http.ResponseWriter, r *http.Request) {
+	if Err != nil {
+		HandleError(w, "Internal server error", http.StatusInternalServerError)
+		return
+	}
+	if r.URL.Path == "/" || r.URL.Path == "/home" {
+		if r.Method == "GET" {
+			handleHome(w, r)
+			return
+		} else {
+			HandleError(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+	} else if r.URL.Path == "/auth" {
+		if r.Method == "GET" {
+			handleAuth(w, r)
+			return
+		} else {
+			HandleError(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+	} else if r.URL.Path == "/schooldashboard" {
+		if r.Method == "GET" {
+			handleDashboardSchool(w, r)
+		}
+	} else if r.URL.Path == "/parentsdashboard" {
+		if r.Method == "GET" {
+			handleDashboardParents(w, r)
+		}
+	} else if r.URL.Path == "/boarding" {
+		if r.Method == "GET" {
+			handleBoarding(w, r)
+		}
 	}
 }
