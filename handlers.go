@@ -14,6 +14,39 @@ type ErrorModel struct {
 	StatusCode int
 }
 
+type Route struct {
+	School      string
+	RouteName   string
+	NumberPlate string
+	Route       string
+	Driver      string
+	Status      string
+}
+
+type Student struct {
+	School      string
+	RouteName   string
+	IndexNumber string
+	Grade       string
+	Name        string
+	PickUp      string
+}
+
+type Parent struct {
+	RouteName   string
+	StudentName string
+	Grade       string
+	School      string
+	PickUp      string
+	IndexNumber string
+}
+
+type Boarding struct {
+	School    string
+	BusDetail Route
+	Students  []Student
+}
+
 func handleAuth(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		tmpl, err := template.ParseFiles("public/authentication.html")
