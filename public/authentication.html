@@ -2,121 +2,120 @@
 <body>
     <div class="container">
         <div class="tab-buttons">
-            <button class="tab-btn active" data-tab="login">Login</button>
-            <button class="tab-btn" data-tab="signup">Sign Up</button>
+            <button class="tab-btn {{.LoginTabClass}}" data-tab="login">{{.LoginTabText}}</button>
+            <button class="tab-btn {{.SignupTabClass}}" data-tab="signup">{{.SignupTabText}}</button>
         </div>
 
         <!-- Login Section -->
-        <div class="tab-content active" id="loginContent">
+        <div class="tab-content {{.LoginTabContentClass}}" id="loginContent">
             <div class="toggle-buttons">
-                <button class="toggle-btn active" data-form="schoolLogin">School</button>
-                <button class="toggle-btn" data-form="parentLogin">Parent</button>
+                <button class="toggle-btn {{.SchoolLoginTabClass}}" data-form="schoolLogin">{{.SchoolLoginText}}</button>
+                <button class="toggle-btn {{.ParentLoginTabClass}}" data-form="parentLogin">{{.ParentLoginText}}</button>
             </div>
 
             <!-- School Login Form -->
-            
-            <div class="form-section active" id="schoolLoginForm">
-                <form action="/auth" method="POST">
-                    <input type="hidden" name="action" value="login">
+            <div class="form-section {{.SchoolLoginFormClass}}" id="schoolLoginForm">
+                <form action="{{.FormAction}}" method="POST">
+                    <input type="hidden" name="action" value="{{.Action}}">
                     <input type="hidden" name="userType" value="school">
                     <div class="form-group">
-                        <label for="schoolEmail">School Email</label>
+                        <label for="schoolEmail">{{.SchoolEmailLabel}}</label>
                         <input type="email" id="schoolEmail" name="schoolEmail" required>
                     </div>
                     <div class="form-group">
-                        <label for="schoolPassword">Password</label>
+                        <label for="schoolPassword">{{.SchoolPasswordLabel}}</label>
                         <input type="password" id="schoolPassword" name="schoolPassword" required>
                     </div>
                     <div class="forgot-password">
-                        <a href="#">Forgot Password?</a>
+                        <a href="{{.ForgotPasswordLink}}">{{.ForgotPasswordText}}</a>
                     </div>
-                    <button type="submit">Login as School</button>
+                    <button type="submit">{{.LoginAsSchoolButton}}</button>
                 </form>
             </div>
 
             <!-- Parent Login Form -->
-            <div class="form-section" id="parentLoginForm">
-                <form action="/auth" method="POST">
-                    <input type="hidden" name="action" value="login">
+            <div class="form-section {{.ParentLoginFormClass}}" id="parentLoginForm">
+                <form action="{{.FormAction}}" method="POST">
+                    <input type="hidden" name="action" value="{{.Action}}">
                     <input type="hidden" name="userType" value="parent">
                     <div class="form-group">
-                        <label for="parentEmail">Email Address</label>
+                        <label for="parentEmail">{{.ParentEmailLabel}}</label>
                         <input type="email" id="parentEmail" name="parentEmail" required>
                     </div>
                     <div class="form-group">
-                        <label for="parentPassword">Password</label>
+                        <label for="parentPassword">{{.ParentPasswordLabel}}</label>
                         <input type="password" id="parentPassword" name="parentPassword" required>
                     </div>
                     <div class="forgot-password">
-                        <a href="#">Forgot Password?</a>
+                        <a href="{{.ForgotPasswordLink}}">{{.ForgotPasswordText}}</a>
                     </div>
-                    <button type="submit">Login as Parent</button>
+                    <button type="submit">{{.LoginAsParentButton}}</button>
                 </form>
             </div>
         </div>
 
         <!-- Sign Up Section -->
-        <div class="tab-content" id="signupContent">
+        <div class="tab-content {{.SignupTabContentClass}}" id="signupContent">
             <div class="toggle-buttons">
-                <button class="toggle-btn active" data-form="school">School</button>
-                <button class="toggle-btn" data-form="parent">Parent</button>
+                <button class="toggle-btn {{.SchoolSignupTabClass}}" data-form="school">{{.SchoolSignupText}}</button>
+                <button class="toggle-btn {{.ParentSignupTabClass}}" data-form="parent">{{.ParentSignupText}}</button>
             </div>
 
             <!-- School Signup Form -->
-            <div class="form-section active" id="schoolForm">
-                <form action="/auth" method="POST">
-                    <input type="hidden" name="action" value="signup">
+            <div class="form-section {{.SchoolSignupFormClass}}" id="schoolForm">
+                <form action="{{.FormAction}}" method="POST">
+                    <input type="hidden" name="action" value="{{.Action}}">
                     <input type="hidden" name="userType" value="school">
                     <div class="form-group">
-                        <label for="schoolName">School Name</label>
+                        <label for="schoolName">{{.SchoolNameLabel}}</label>
                         <input type="text" id="schoolName" name="schoolName" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupSchoolEmail">Email</label>
+                        <label for="signupSchoolEmail">{{.SignupSchoolEmailLabel}}</label>
                         <input type="email" id="signupSchoolEmail" name="signupSchoolEmail" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupSchoolPassword">Password</label>
-                        <input type="password" id="signupSchoolPassword" name="signupSchoolPassword"required>
+                        <label for="signupSchoolPassword">{{.SignupSchoolPasswordLabel}}</label>
+                        <input type="password" id="signupSchoolPassword" name="signupSchoolPassword" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupSchoolConfirmPassword">Confirm Password</label>
+                        <label for="signupSchoolConfirmPassword">{{.SignupSchoolConfirmPasswordLabel}}</label>
                         <input type="password" id="signupSchoolConfirmPassword" name="signupSchoolConfirmPassword" required>
                     </div>
-                    <button type="submit">Register School</button>
+                    <button type="submit">{{.RegisterSchoolButton}}</button>
                 </form>
             </div>
 
             <!-- Parent Signup Form -->
-            <div class="form-section" id="parentForm">
-                <form action="/auth" method="POST">
-                    <input type="hidden" name="action" value="signup">
+            <div class="form-section {{.ParentSignupFormClass}}" id="parentForm">
+                <form action="{{.FormAction}}" method="POST">
+                    <input type="hidden" name="action" value="{{.Action}}">
                     <input type="hidden" name="userType" value="parent">
                     <div class="form-group">
-                        <label for="parentFullName">Full Name</label>
+                        <label for="parentFullName">{{.ParentFullNameLabel}}</label>
                         <input type="text" id="parentFullName" name="parentFullName" required>
                     </div>
                     <div class="form-group">
-                        <label for="parentSignupEmail">Email Address</label>
+                        <label for="parentSignupEmail">{{.ParentSignupEmailLabel}}</label>
                         <input type="email" id="parentSignupEmail" name="parentSignupEmail" required>
                     </div>
                     <div class="form-group">
-                        <label for="parentSchool">School</label>
+                        <label for="parentSchool">{{.ParentSchoolLabel}}</label>
                         <input type="text" id="parentSchool" name="parentSchool" required>
                     </div>
                     <div class="form-group">
-                        <label for="childAdmissionNumber">Child Admission Number</label>
-                        <input type="text" id="childAdmissionNumber" name="childAdmissionNumber"required>
+                        <label for="childAdmissionNumber">{{.ChildAdmissionNumberLabel}}</label>
+                        <input type="text" id="childAdmissionNumber" name="childAdmissionNumber" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupParentPassword">Password</label>
+                        <label for="signupParentPassword">{{.SignupParentPasswordLabel}}</label>
                         <input type="password" id="signupParentPassword" name="signupParentPassword" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupParentConfirmPassword">Confirm Password</label>
-                        <input type="password" id="signupParentConfirmPassword"  name="signupParentConfirmPassword" required>
+                        <label for="signupParentConfirmPassword">{{.SignupParentConfirmPasswordLabel}}</label>
+                        <input type="password" id="signupParentConfirmPassword" name="signupParentConfirmPassword" required>
                     </div>
-                    <button type="submit">Register as Parent</button>
+                    <button type="submit">{{.RegisterParentButton}}</button>
                 </form>
             </div>
         </div>
@@ -124,5 +123,4 @@
 
     <script src="../static/script.js"></script>
 </body>
-</html>
-{{ end}}
+{{ end }}
