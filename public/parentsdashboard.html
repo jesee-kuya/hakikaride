@@ -9,9 +9,9 @@
     <div class="dashboard">
         <div class="sidebar">
             <div class="user-profile">
-                <div class="avatar">P</div>
-                <h3>Parent Name</h3>
-                <p>parent@email.com</p>
+                <div class="avatar">{{ .ParentInitial }}</div>
+                <h3>{{ .ParentName }}</h3>
+                <p>{{ .ParentEmail }}</p>
             </div>
             <ul class="nav-links">
                 <li>
@@ -73,16 +73,16 @@
                         <h3>Student Details</h3>
                         <div class="details-grid">
                             <span class="label">Name:</span>
-                            <span class="value">John Doe</span>
+                            <span class="value">{{ .StudentName }}</span>
 
                             <span class="label">Grade:</span>
-                            <span class="value">Grade 8</span>
+                            <span class="value">{{ .StudentGrade }}</span>
 
                             <span class="label">School:</span>
-                            <span class="value">Springfield High School</span>
+                            <span class="value">{{ .StudentSchool }}</span>
 
                             <span class="label">Student ID:</span>
-                            <span class="value">#12345</span>
+                            <span class="value">{{ .StudentID }}</span>
                         </div>
                     </div>
                 </div>
@@ -92,15 +92,15 @@
                 <form class="update-form">
                     <div class="form-group">
                         <label>Parent Name</label>
-                        <input type="text" value="Parent Name">
+                        <input type="text" value="{{ .ParentName }}">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" value="parent@email.com">
+                        <input type="email" value="{{ .ParentEmail }}">
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
-                        <input type="tel" value="+1234567890">
+                        <input type="tel" value="{{ .ParentPhone }}">
                     </div>
                     <button type="submit">Save Changes</button>
                 </form>
@@ -144,6 +144,4 @@
         });
     </script>
 </body>
-
-</html>
 {{ end }}

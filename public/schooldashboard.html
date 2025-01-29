@@ -9,8 +9,8 @@
         <div class="sidebar">
             <div class="school-profile">
                 <div class="school-logo">S</div>
-                <h3>Springfield High</h3>
-                <p>admin@springfield.edu</p>
+                <h3>{{ .SchoolName }}</h3>
+                <p>{{ .SchoolEmail }}</p>
             </div>
             <ul class="nav-links">
                 <li>
@@ -32,8 +32,7 @@
                 <li>
                     <a href="#">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                            <path
-                                d="M18,11H14V9H16V7H14V5H18M16,1A7,7 0 0,1 23,8A7,7 0 0,1 16,15C15.5,15 15,14.9 14.6,14.8L8,20.4L6.6,19L13.2,12.4C13.1,12 13,11.5 13,11A7,7 0 0,1 20,4A7,7 0 0,1 16,1M16,3A5,5 0 0,0 11,8A5,5 0 0,0 16,13A5,5 0 0,0 21,8A5,5 0 0,0 16,3M2,20V22H12V20H2Z" />
+                            <path d="M18,11H14V9H16V7H14V5H18M16,1A7,7 0 0,1 23,8A7,7 0 0,1 16,15C15.5,15 15,14.9 14.6,14.8L8,20.4L6.6,19L13.2,12.4C13.1,12 13,11.5 13,11A7,7 0 0,1 20,4A7,7 0 0,1 16,1M16,3A5,5 0 0,0 11,8A5,5 0 0,0 16,13A5,5 0 0,0 21,8A5,5 0 0,0 16,3M2,20V22H12V20H2Z" />
                         </svg>
                         Buses & Routes
                     </a>
@@ -41,8 +40,7 @@
                 <li>
                     <a href="#">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                            <path
-                                d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
+                            <path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
                         </svg>
                         Tracking
                     </a>
@@ -50,8 +48,7 @@
                 <li>
                     <a href="#">
                         <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-                            <path
-                                d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+                            <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
                         </svg>
                         Students
                     </a>
@@ -59,10 +56,9 @@
                 <li>
                     <a href="https://hakikaride.onrender.com/" class="out">
                         <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M16,13V11H7V9H16V7L20,12L16,17M14,2C15.11,2 16,2.9 16,4V8H14V4H6V20H14V16H16V20C16,21.11 15.11,22 14,22H6C4.9,22 4,21.11 4,20V4C4,2.9 4.9,2 6,2H14Z" />
+                            <path d="M16,13V11H7V9H16V7L20,12L16,17M14,2C15.11,2 16,2.9 16,4V8H14V4H6V20H14V16H16V20C16,21.11 15.11,22 14,22H6C4.9,22 4,21.11 4,20V4C4,2.9 4.9,2 6,2H14Z" />
                         </svg>
-                        sign out
+                        Sign out
                     </a>
                 </li>
             </ul>
@@ -80,15 +76,15 @@
                 <div class="grid">
                     <div class="stats-card">
                         <h3>Total Buses</h3>
-                        <p>15 Active Buses</p>
+                        <p>{{ .TotalBuses }} Active Buses</p>
                     </div>
                     <div class="stats-card">
                         <h3>Active Routes</h3>
-                        <p>12 Routes</p>
+                        <p>{{ .ActiveRoutes }} Routes</p>
                     </div>
                     <div class="stats-card">
                         <h3>Total Students</h3>
-                        <p>850 Students</p>
+                        <p>{{ .TotalStudents }} Students</p>
                     </div>
                 </div>
             </div>
@@ -107,36 +103,17 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{ range .Buses }}
                             <tr>
-                                <td>BUS001</td>
-                                <td>XYZ-1234</td>
-                                <td>Route A - North Side</td>
-                                <td>John Smith</td>
-                                <td><span class="status active">Active</span></td>
+                                <td>{{ .ID }}</td>
+                                <td>{{ .Number }}</td>
+                                <td>{{ .Route }}</td>
+                                <td>{{ .Driver }}</td>
+                                <td><span class="status {{ .Status }}">{{ .Status }}</span></td>
                             </tr>
-                            <tr>
-                                <td>BUS002</td>
-                                <td>ABC-5678</td>
-                                <td>Route B - South Side</td>
-                                <td>Mary Johnson</td>
-                                <td><span class="status active">Active</span></td>
-                            </tr>
-                            <tr>
-                                <td>BUS003</td>
-                                <td>DEF-9012</td>
-                                <td>Route C - East Side</td>
-                                <td>Robert Wilson</td>
-                                <td><span class="status inactive">Maintenance</span></td>
-                            </tr>
+                            {{ end }}
                         </tbody>
                     </table>
-                </div>
-            </div>
-
-            <div class="section" style="display: none;">
-                <h2>Live Tracking</h2>
-                <div class="map-container" style="display: none;">
-                    {{ template "map" }}
                 </div>
             </div>
 
@@ -154,27 +131,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{ range .Students }}
                             <tr>
-                                <td>STU001</td>
-                                <td>Alice Brown</td>
-                                <td>Grade 8</td>
-                                <td>Route A</td>
-                                <td>Stop 3</td>
+                                <td>{{ .ID }}</td>
+                                <td>{{ .Name }}</td>
+                                <td>{{ .Grade }}</td>
+                                <td>{{ .Route }}</td>
+                                <td>{{ .PickUpPoint }}</td>
                             </tr>
-                            <tr>
-                                <td>STU002</td>
-                                <td>James Wilson</td>
-                                <td>Grade 7</td>
-                                <td>Route B</td>
-                                <td>Stop 2</td>
-                            </tr>
-                            <tr>
-                                <td>STU003</td>
-                                <td>Emily Davis</td>
-                                <td>Grade 9</td>
-                                <td>Route A</td>
-                                <td>Stop 5</td>
-                            </tr>
+                            {{ end }}
                         </tbody>
                     </table>
                 </div>
@@ -182,7 +147,4 @@
         </div>
     </div>
 </body>
-
-</html>
-
 {{ end }}
