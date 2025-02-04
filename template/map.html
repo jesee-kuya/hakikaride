@@ -4,84 +4,12 @@
     <div class="section">
         <h2>Location Tracking</h2>
         <div class="map-container">
+            <!-- Map goes here  -->
             <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-            <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-            <script>
-                function showCustomAlert(message) {
-                    const alert = document.createElement('div');
-                    alert.className = 'custom-alert';
-                    alert.innerText = message;
-                    document.body.appendChild(alert);
-                    setTimeout(() => {
-                        alert.classList.add('show');
-                    }, 10);
-                    setTimeout(() => {
-                        alert.classList.remove('show');
-                        setTimeout(() => alert.remove(), 300);
-                    }, 3000);
-                }
-
-                // Initialize HERE Platform
-                const platform = new H.service.Platform({
-                    apikey: 'iYGPG2aN0ZDx6NBCHsBPsk10Pkrl8WqUhYN2rWDGOb4' // Replace with your HERE Maps API Key
-                });
-                const defaultLayers = platform.createDefaultLayers();
-
-                // Map initialization and simulation
-                function initializeMapWithMovement(busRoute) {
-                    const mapContainer = document.querySelector('.map-container');
-                    mapContainer.innerHTML = ''; // Clear previous content
-
-                    const map = new H.Map(
-                        mapContainer,
-                        defaultLayers.vector.normal.map,
-                        {
-                            center: { lat: busRoute[0].Lat, lng: busRoute[0].Lng }, // Initial center
-                            zoom: 14,
-                            pixelRatio: window.devicePixelRatio || 1
-                        }
-                    );
-
-                    // Enable map interactions
-                    const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-                    const ui = H.ui.UI.createDefault(map, defaultLayers);
-
-                    // Add a marker for the bus
-                    const marker = new H.map.Marker({ lat: busRoute[0].Lat, lng: busRoute[0].Lng });
-                    map.addObject(marker);
-
-                    // Function to simulate movement along the route
-                    // let index = 0;
-                    // function moveBus() {
-                    //     if (index < busRoute.length) {
-                    //         if (index === 0) {
-                    //             showCustomAlert("The student's journey has begun!");
-                    //         } else if (index === busRoute.length - 1) {
-                    //             showCustomAlert("The student's journey has ended!");
-                    //         }
-                    //         const position = { lat: busRoute[index].Lat, lng: busRoute[index].Lng };
-                    //         marker.setGeometry(position); // Update marker position
-                    //         map.setCenter(position); // Center the map on the marker
-                    //         index++;
-                    //         setTimeout(moveBus, 1000); // Adjust interval for speed
-                    //     }
-                    // }
-
-                    // moveBus(); // Start movement simulation
-
-                    // Resize map on window resize
-                    window.addEventListener('resize', () => map.getViewPort().resize());
-                }
-
-                // Initialize the map when the page loads
-                document.addEventListener('DOMContentLoaded', function() {
-                    const busRoute = {{ . | toJson }}; // Inject the bus route from Go backend
-                    initializeMapWithMovement(busRoute);
-                });
-            </script>
+            <link rel="stylesheet" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />            
         </div>
     </div>
 </body>
