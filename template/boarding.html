@@ -9,8 +9,8 @@
         <div class="sidebar">
             <div class="school-profile">
                 <div class="school-logo">S</div>
-                <h3>{{.Data.School}}</h3> <!-- School Name dynamically passed -->
-                <p>admin@{{.Data.School | lower}}.edu</p> <!-- Dynamic School email -->
+                <h3>{{.Data.School}}</h3> 
+                <p>admin@{{.Data.School }} </p> 
             </div>
             <ul class="nav-links">
                 <li>
@@ -35,7 +35,7 @@
         </div>
         <div class="main-content">
             <div class="journey-header">
-                <h2>Morning Journey - {{.Data.BusDetail.RouteName}}</h2> <!-- Route Name dynamically passed -->
+                <h2>Morning Journey - {{.Data.BusDetail.RouteName}}</h2> 
                 <div class="journey-info">
                     <div class="journey-stat">
                         <h3>Total Students</h3>
@@ -71,70 +71,7 @@
             <div class="map-container" id="mapContainer">
                 <!-- Map will be displayed here when journey starts -->
                 <div style="text-align: center; padding: 2rem;">
-                    <script>
-                        function showCustomAlert(message) {
-                            const alert = document.createElement('div');
-                            alert.className = 'custom-alert';
-                            alert.innerText = message;
-                            document.body.appendChild(alert);
-                            setTimeout(() => {
-                                alert.classList.add('show');
-                            }, 10);
-                            setTimeout(() => {
-                                alert.classList.remove('show');
-                                setTimeout(() => alert.remove(), 300);
-                            }, 3000);
-                        }
-                        // Initialize HERE Platform
-                        const platform = new H.service.Platform({
-                            apikey: 'iYGPG2aN0ZDx6NBCHsBPsk10Pkrl8WqUhYN2rWDGOb4' // Replace with your HERE Maps API Key
-                        });
-                        const defaultLayers = platform.createDefaultLayers();
-
-                        function initializeMapWithMovement() {
-                            const mapContainer = document.querySelector('.map-container');
-                            mapContainer.innerHTML = ''; // Clear previous content
-
-                            const map = new H.Map(
-                                mapContainer,
-                                defaultLayers.vector.normal.map,
-                                {
-                                    center: { lat: {{index .Data.BusDetail.Latitude 0}}, lng: {{index .Data.BusDetail.Longitude 0}} }, // Dynamic Coordinates
-                                    zoom: 14,
-                                    pixelRatio: window.devicePixelRatio || 1
-                                }
-                            );
-
-                            const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-                            const ui = H.ui.UI.createDefault(map, defaultLayers);
-
-                            // Define the bus route dynamically from Go data
-                            const busRoute = {{.Data.BusDetail.Route}};
-                            const marker = new H.map.Marker(busRoute[0]);
-                            map.addObject(marker);
-
-                            let index = 0;
-                            function moveBus() {
-                                if (index < busRoute.length) {
-                                    if (index === 0) {
-                                        showCustomAlert("The journey has begun");
-                                    } else if (index === busRoute.length - 1) {
-                                        showCustomAlert("The journey has ended");
-                                    }
-                                    const position = busRoute[index];
-                                    marker.setGeometry(position);
-                                    map.setCenter(position);
-                                    index++;
-                                    setTimeout(moveBus, 1000); // Adjust interval for speed
-                                }
-                            }
-
-                            moveBus();
-                            window.addEventListener('resize', () => map.getViewPort().resize());
-                        }
-
-                        document.addEventListener('DOMContentLoaded', initializeMapWithMovement);
-                    </script>
+        
                 </div>
             </div>
 
