@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background: #003049;
+    padding: 1rem 5%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo svg {
+    width: 24px;
+    height: 24px;
+}
+
+.logo-box {
+    color: #FFB800;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #FFB800;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-login {
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.btn-login:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-signup {
+    background: #FFB800;
+    color: #003049;
+}
+
+.btn-signup:hover {
+    background: #ffc933;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    background-image: url('/static/images/homepagepicture.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 8rem 5% 5rem;
+    color: white;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: #FFB800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.btn-get-started {
+    background: #FFB800;
+    color: #003049;
+    font-size: 1.2rem;
+    padding: 1rem 2.5rem;
+    display: inline-block;
+}
+
+.btn-get-started:hover {
+    background: #ffc933;
+    transform: translateY(-2px);
+}
+
+/* Features Section */
+.features {
+    padding: 5rem 5%;
+    background: #ffffff;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    background: #FFB800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: #003049;
+}
+
+.feature-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #003049;
+}
+
+.feature-card h3 {
+    color: #003049;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.feature-card p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 5rem 5%;
+    background: #003049;
+    text-align: center;
+    color: #ffffff;
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+}
+
+.cta-content p {
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.btn-signup-now {
+    background: #FFB800;
+    color: #003049;
+    font-size: 1.2rem;
+    padding: 1rem 2.5rem;
+    display: inline-block;
+}
+
+.btn-signup-now:hover {
+    background: #ffc933;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    padding: 2rem 5%;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+footer p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.credits {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+}
