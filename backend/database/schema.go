@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/mattn/go-sqlite3" // SQLite3 driver
+	_ "github.com/mattn/go-sqlite3"
 )
 
 // executeSQLFile reads and executes SQL statements from a file on the given database connection
@@ -16,7 +16,6 @@ func executeSQLFile(db *sql.DB) error {
 		return fmt.Errorf("failed to read SQL file: %w", err)
 	}
 
-	// Split SQL statements and execute each one
 	statements := string(content)
 	_, err = db.Exec(statements)
 	if err != nil {
@@ -27,13 +26,11 @@ func executeSQLFile(db *sql.DB) error {
 }
 
 func CreateConnection() *sql.DB {
-	// Open SQLite database connection
 	db, err := sql.Open("sqlite3", "backend/database/transport.db")
 	if err != nil {
 		log.Fatalf("failed to open database: %v", err)
 	}
 
-	// Execute the SQL file
 	err = executeSQLFile(db)
 	if err != nil {
 		log.Fatalf("failed to execute SQL file: %v", err)
