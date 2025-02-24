@@ -19,5 +19,5 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	var data Data
 	data.Title = "home"
-	Tmpl.ExecuteTemplate(w, "index.html", data)
+	Tmpl.ExecuteTemplate(w, "base.html", data)
 }
