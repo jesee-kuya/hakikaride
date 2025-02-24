@@ -1,4 +1,4 @@
-module hakikaride
+module github.com/jesee-kuya/hakikaride
 
 go 1.23.4
 
