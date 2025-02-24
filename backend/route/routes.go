@@ -13,5 +13,6 @@ func InitRoutes() *http.ServeMux {
 	r.Handle("/frontend/", http.StripPrefix("/frontend/", fs))
 
 	r.HandleFunc("/", handler.IndexHandler)
+	r.HandleFunc("/auth", handler.AuthHandler)
 	return r
 }
