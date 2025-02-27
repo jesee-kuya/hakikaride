@@ -4,12 +4,12 @@
 {{ else if eq "home" .Title }}
 {{ template "index" }}
 {{ else if eq "parent" .Title }}
-{{ template "parentdashboard" .Data}}
+{{ template "parentdashboard" .Details}}
 {{ else if eq "school" .Title }}
-{{ template "schooldashboard" .Data}}
+{{ template "schooldashboard" .Details}}
 {{ else if eq "boarding" .Title}}
-{{ template "boarding" .Data }}
+{{ template "boarding" .Details }}
 {{ else if eq "error" .Title }}
-{{ template "error" .Data}}
+{{ template "error" .Details}}
 {{ end }}
 
