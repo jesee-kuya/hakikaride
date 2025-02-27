@@ -16,5 +16,6 @@ func InitRoutes() *http.ServeMux {
 	r.HandleFunc("/auth", handler.AuthHandler)
 	r.HandleFunc("/parent", handler.ParentHandler)
 	r.HandleFunc("/school", handler.SchoolHandler)
+	r.HandleFunc("/boarding", handler.SchoolHandler)
 	return r
 }
