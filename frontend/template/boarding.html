@@ -1,4 +1,5 @@
 {{ define "boarding" }}
+
 <body class="body">
     <div class="dashboard">
         <button class="menu-toggle" id="menuToggle">
@@ -9,8 +10,8 @@
         <div class="sidebar">
             <div class="school-profile">
                 <div class="school-logo">S</div>
-                <h3>{{.Data.School}}</h3> 
-                <p>admin@{{.Data.School }} </p> 
+                <h3>{{.Data.School}}</h3>
+                <p>admin@{{.Data.School }} </p>
             </div>
             <ul class="nav-links">
                 <li>
@@ -35,7 +36,7 @@
         </div>
         <div class="main-content">
             <div class="journey-header">
-                <h2>Morning Journey - {{.Data.BusDetail.RouteName}}</h2> 
+                <h2>Morning Journey - {{.Data.BusDetail.RouteName}}</h2>
                 <div class="journey-info">
                     <div class="journey-stat">
                         <h3>Total Students</h3>
@@ -47,7 +48,8 @@
                     </div>
                     <div class="journey-stat">
                         <h3>Remaining</h3>
-                        <p id="remainingCount">{{len .Data.Students}}</p> <!-- Dynamically show the remaining students -->
+                        <p id="remainingCount">{{len .Data.Students}}</p>
+                        <!-- Dynamically show the remaining students -->
                     </div>
                 </div>
             </div>
@@ -68,10 +70,12 @@
                 </button>
             </div>
 
+            <button onclick="getLocation()">Share Location</button>
+
             <div class="map-container" id="mapContainer">
                 <!-- Map will be displayed here when journey starts -->
                 <div style="text-align: center; padding: 2rem;">
-        
+
                 </div>
             </div>
 
