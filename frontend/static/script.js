@@ -229,3 +229,20 @@ if (busTable) {
         });
     });
 }
+
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            document.getElementById("status").innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+        }, error => {
+            document.getElementById("status").innerText = "Unable to retrieve location.";
+            console.error(error);
+        });
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
