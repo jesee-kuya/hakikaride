@@ -14,6 +14,7 @@
             <div class="toggle-buttons">
                 <button class="toggle-btn active" data-form="schoolLogin">School</button>
                 <button class="toggle-btn" data-form="parentLogin">Parent</button>
+                <button class="toggle-btn" data-form="driverLogin">Parent</button>
             </div>
 
             <!-- School Login Form -->
@@ -34,6 +35,25 @@
                         <a href="#">Forgot Password?</a>
                     </div>
                     <button type="submit">Login as School</button>
+                </form>
+            </div>
+
+            <div class="form-section active" id="driverLoginForm">
+                <form action="/school" method="POST">
+                    <input type="hidden" name="action" value="login">
+                    <input type="hidden" name="userType" value="boarding">
+                    <div class="form-group">
+                        <label for="schoolEmail">School Email</label>
+                        <input type="email" id="schoolEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="schoolPassword">Password</label>
+                        <input type="password" id="schoolPassword" name="password" required>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#">Forgot Password?</a>
+                    </div>
+                    <button type="submit">Login as Driver</button>
                 </form>
             </div>
 
@@ -87,6 +107,30 @@
                         <input type="password" id="signupSchoolConfirmPassword" name="signupSchoolConfirmPassword" required>
                     </div>
                     <button type="submit">Register School</button>
+                </form>
+            </div>
+
+            <div class="form-section active" id="driverForm">
+                <form action="/auth" method="POST">
+                    <input type="hidden" name="action" value="signup">
+                    <input type="hidden" name="userType" value="driver">
+                    <div class="form-group">
+                        <label for="schoolName">School Name</label>
+                        <input type="text" id="schoolName" name="username"required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupSchoolEmail">Email</label>
+                        <input type="email" id="signupSchoolEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupSchoolPassword">Password</label>
+                        <input type="password" id="signupSchoolPassword" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupSchoolConfirmPassword">Confirm Password</label>
+                        <input type="password" id="signupSchoolConfirmPassword" name="signupSchoolConfirmPassword" required>
+                    </div>
+                    <button type="submit">Register Driver</button>
                 </form>
             </div>
 
