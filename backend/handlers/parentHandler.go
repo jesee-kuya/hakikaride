@@ -8,11 +8,6 @@ func ParentHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if r.Method != http.MethodGet {
-		ErrorHandler(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
 	var data Data
 	data.Title = "parent"
 
