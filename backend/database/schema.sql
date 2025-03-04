@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS tblUsers (
     id INTEGER  PRIMARY KEY,
     user_name VARCHAR(40) NOT NULL,
-    eser_email VARCHAR(50) NOT NULL,
+    user_email VARCHAR(50) NOT NULL,
     phone_no VARCHAR(15) NOT NULL,
     user_type VARCHAR(6) NOT NULL CHECK('parent', 'driver', 'admin'),
     user_password VARCHAR(100) NOT NULL
