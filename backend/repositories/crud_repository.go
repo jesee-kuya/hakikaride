@@ -60,15 +60,15 @@ func DeleteRecord(db *sql.DB, table, column string, id int) error {
 	return nil
 }
 
-func GetUserByEmail(email string) (models.User, error) {
-	query := "SELECT id, username, email, user_password FROM tblUsers WHERE email = ?"
-	row := util.DB.QueryRow(query, email)
+func GetUserByEmail(user_email string) (models.User, error) {
+	query := "SELECT id, user_name, user_email, user_password FROM tblUsers WHERE user_email = ?"
+	row := util.DB.QueryRow(query, user_email)
 	user, err := UserDetails(row)
 	return user, err
 }
 
 func GetUserByName(name string) (models.User, error) {
-	query := "SELECT id, username, email, user_password FROM tblUsers WHERE username  = ?"
+	query := "SELECT id, user_name, user_email, user_password FROM tblUsers WHERE user_name  = ?"
 	row := util.DB.QueryRow(query, name)
 	user, err := UserDetails(row)
 	return user, err
