@@ -11,5 +11,15 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 			ErrorHandler(w, "Unexpected Error Occured. Try again later", http.StatusInternalServerError)
 			return
 		}
+	} else if r.Method == http.MethodPost {
+		if r.FormValue("action") == "signup" {
+			SignupHandler(w, r)
+		} else if r.FormValue("action") == "login" {
+			LoginHandler(w, r)
+		} else {
+			ErrorHandler(w, "Bad Request", http.StatusBadRequest)
+		}
+	} else {
+		ErrorHandler(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 	}
 }
