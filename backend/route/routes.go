@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	handler "github.com/jesee-kuya/hakikaride/backend/handlers"
+	"github.com/jesee-kuya/hakikaride/backend/middleware"
 )
 
 func InitRoutes() *http.ServeMux {
@@ -14,8 +15,8 @@ func InitRoutes() *http.ServeMux {
 
 	r.HandleFunc("/", handler.IndexHandler)
 	r.HandleFunc("/auth", handler.AuthHandler)
-	r.HandleFunc("/parent", handler.ParentHandler)
-	r.HandleFunc("/school", handler.SchoolHandler)
-	r.HandleFunc("/boarding", handler.BoardingHandler)
+	r.HandleFunc("/parent", middleware.Authenticate(handler.ParentHandler))
+	r.HandleFunc("/school", middleware.Authenticate(handler.SchoolHandler))
+	r.HandleFunc("/boarding", middleware.Authenticate(handler.BoardingHandler))
 	return r
 }
