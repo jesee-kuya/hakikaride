@@ -1,94 +1,63 @@
--- Users table for authentication
-CREATE TABLE IF NOT EXISTS Users (
-    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Username TEXT NOT NULL UNIQUE,
-    Email TEXT NOT NULL UNIQUE,
-    PasswordHash TEXT NOT NULL,
-    UserType TEXT NOT NULL CHECK(UserType IN ('admin', 'parent', 'driver')),
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-    LastLogin DATETIME,
-    IsActive BOOLEAN DEFAULT 1
+CREATE TABLE IF NOT EXISTS tblUsers (
+    id INTEGER  PRIMARY KEY,
+    user_name VARCHAR(40) NOT NULL,
+    eser_email VARCHAR(50) NOT NULL,
+    phone_no VARCHAR(15) NOT NULL,
+    user_type VARCHAR(6) NOT NULL CHECK('parent', 'driver', 'admin'),
+    user_password VARCHAR(100) NOT NULL
 );
 
--- Parent's table with enhanced contact information
-CREATE TABLE IF NOT EXISTS Parents (
-    ParentID INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserID INTEGER NOT NULL,
-    FirstName TEXT NOT NULL,
-    LastName TEXT NOT NULL,
-    PhoneNumber TEXT NOT NULL,
-    Address TEXT,
-    IsActive BOOLEAN DEFAULT 1,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE IF NOT EXISTS tblStudents (
+    id INTEGER PRIMARY KEY,
+    admin_no VARCHAR(10) NOT NULL,
+    student_name VARCHAR(40) NOT NULL,
+    student_parent INTEGER NOT NULL,
+    student_location INTEGER NOT NULL,
+
+    FOREIGN KEY student_parent REFERENCES tblUsers (id) 
+    FOREIGN KEY student_location REFERENCES tblLocations (id) 
 );
 
--- Students table
-CREATE TABLE IF NOT EXISTS Students (
-    StudentID INTEGER PRIMARY KEY AUTOINCREMENT,
-    ParentID INTEGER NOT NULL,
-    FirstName TEXT NOT NULL,
-    LastName TEXT NOT NULL,
-    Grade TEXT NOT NULL,
-    AdmNumber TEXT NOT NULL UNIQUE,
-    PickupPoint TEXT NOT NULL,
-    DropoffPoint TEXT NOT NULL,
-    EmergencyContact TEXT,
-    IsActive BOOLEAN DEFAULT 1,
-    FOREIGN KEY (ParentID) REFERENCES Parents(ParentID)
+CREATE IF NOT EXISTS tblRoutes (
+    id INTEGER PRIMARY KEY,
+    route_name VARCHAR(10) NOT NULL,
+    start_point VARCHAR(10) NOT NULL,
+    end_point VARCHAR(10) NOT NULL
 );
 
--- Drivers table
-CREATE TABLE IF NOT EXISTS Drivers (
-    DriverID INTEGER PRIMARY KEY AUTOINCREMENT,
-    UserID INTEGER NOT NULL,
-    FirstName TEXT NOT NULL,
-    LastName TEXT NOT NULL,
-    PhoneNumber TEXT NOT NULL,
-    IsActive BOOLEAN DEFAULT 1,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE IF NOT EXISTS tblLocations (
+    id INTEGER PRIMARY KEY,
+    location_name VARCHAR(20) NOT NULL,
+    route_id INTEGER,
+
+    FOREIGN KEY route_id REFERENCES tblRoutes (id)
 );
 
--- Routes table
-CREATE TABLE IF NOT EXISTS Routes (
-    RouteID INTEGER PRIMARY KEY AUTOINCREMENT,
-    RouteName TEXT NOT NULL,
-    Description TEXT,
-    IsActive BOOLEAN DEFAULT 1
+CREATE IF NOT EXISTS tblBuses (
+    id INTEGER PRIMARY KEY,
+    number_plate VARCHAR(20) NOT NULL
 );
 
--- Buses table
-CREATE TABLE IF NOT EXISTS Buses (
-    BusID INTEGER PRIMARY KEY AUTOINCREMENT,
-    NumberPlate TEXT NOT NULL UNIQUE,
-    RouteID INTEGER NOT NULL,
-    DriverID INTEGER NOT NULL,
-    IsActive BOOLEAN DEFAULT 1,
-    FOREIGN KEY (RouteID) REFERENCES Routes(RouteID),
-    FOREIGN KEY (DriverID) REFERENCES Drivers(DriverID)
-);
+CREATE IF NOT EXISTS tblRides (
+    id INTEGER PRIMARY KEY,
+    ride_date DATE  NOT NULL,
+    route_id INTEGER NOT NULL,
+    driver_id INTEGER NOT NULL,
+    admin_id INTEGER NOT NULL,
+    ride_status BOOLEAN DEFAULT FALSE,
+    ride_session VARCHAR(100) NOT NULL,
+    bus_id INTEGER NOT NULL,
 
--- Trips table
-CREATE TABLE IF NOT EXISTS Trips (
-    TripID INTEGER PRIMARY KEY AUTOINCREMENT,
-    DriverID INTEGER NOT NULL,
-    BusID INTEGER NOT NULL,
-    RouteID INTEGER NOT NULL,
-    FOREIGN KEY (DriverID) REFERENCES Drivers(DriverID),
-    FOREIGN KEY (BusID) REFERENCES Buses(BusID),
-    FOREIGN KEY (RouteID) REFERENCES Routes(RouteID)
-);
+    FOREIGN KEY route_id REFERENCES tblRoutes (id)
+    FOREIGN KEY driver_id REFERENCES tblUsers (id)
+    FOREIGN KEY admin_id REFERENCES tblUsers (id)
+    FOREIGN KEY bus_id REFERENCES tblBuses (id)
+)
 
--- LocationUpdates table
-CREATE TABLE IF NOT EXISTS LocationUpdates (
-    LocationID INTEGER PRIMARY KEY AUTOINCREMENT,
-    TripID INTEGER NOT NULL,
-    Latitude REAL NOT NULL,
-    Longitude REAL NOT NULL,
-    Speed REAL COMMENT 'Speed in km/h',
-    FOREIGN KEY (TripID) REFERENCES Trips(TripID)
+CREATE TABLE IF NOT EXISTS tblSessions (
+  id INTEGER PRIMARY KEY,
+  user_id INTEGER NOT NULL,
+  session_token TEXT NOT NULL UNIQUE,
+  expires_at TIMESTAMP NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES tblUsers (id)
 );
-
--- Create necessary indexes
-CREATE INDEX idx_users_email ON Users(Email);
-CREATE INDEX idx_users_username ON Users(Username);
-CREATE INDEX idx_students_admission ON Students(AdmNumber);
