@@ -237,7 +237,31 @@ function getLocation() {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
             document.getElementById("status").innerText = `Latitude: ${latitude}, Longitude: ${longitude}`;
+            
+            const platform = new H.service.Platform({
+                apikey: "YOUR_HERE_MAPS_API_KEY" // Replace with your HERE Maps API Key
+            });
+            const defaultLayers = platform.createDefaultLayers();
+            
+            // Create a map centered at the user's location
+            const map = new H.Map(
+                document.getElementById("map"),
+                defaultLayers.vector.normal.map,
+                {
+                    zoom: 14,
+                    center: { lat: latitude, lng: longitude }
+                }
+            );
+
+            // Enable map interaction
+            const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+            const ui = H.ui.UI.createDefault(map, defaultLayers);
+
+            // Add marker to the user's location
+            const marker = new H.map.Marker({ lat: latitude, lng: longitude });
+            map.addObject(marker);
         }, error => {
             document.getElementById("status").innerText = "Unable to retrieve location.";
             console.error(error);
@@ -246,3 +270,6 @@ function getLocation() {
         alert("Geolocation is not supported by this browser.");
     }
 }
+
+// Call getLocation when the window loads
+window.onload = getLocation;
