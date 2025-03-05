@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"strings"
@@ -10,11 +9,6 @@ import (
 	"github.com/jesee-kuya/hakikaride/backend/repositories"
 	"github.com/jesee-kuya/hakikaride/backend/util"
 )
-
-type Response struct {
-	Success bool   `json:"success"`
-	Message string `json:"message"`
-}
 
 func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	var user models.User
@@ -34,10 +28,8 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 		err = util.ValidateFormFields(user.Username, user.Email, user.Password)
 		if err != nil {
-			log.Printf("Invalid form values from user: %v\n", err)
-			response := Response{Success: false}
-			w.Header().Set("Content-Type", "application/json")
-			json.NewEncoder(w).Encode(response)
+			log.Println("Invalid form fields:", err)
+			ErrorHandler(w, "Invalid Form Fields", http.StatusBadRequest)
 			return
 		}
 
@@ -54,9 +46,6 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, "/auth", http.StatusSeeOther)
 			return
 		}
-		response := Response{Success: true}
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(response)
 		http.Redirect(w, r, "/auth", http.StatusSeeOther)
 		return
 	} else if r.Method == http.MethodGet {
