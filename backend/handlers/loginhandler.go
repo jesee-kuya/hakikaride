@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 	"text/template"
@@ -42,10 +41,8 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 		err = bcrypt.CompareHashAndPassword([]byte(storedPassword), []byte(r.FormValue("password")))
 		if err != nil {
-			log.Printf("Failed to hash: %v", err)
-			w.Header().Set("Content-Type", "application/json")
-			response := Response{Success: false}
-			json.NewEncoder(w).Encode(response)
+			log.Println("Invalid password", err)
+			ErrorHandler(w, "Invalid Email or Password", http.StatusUnauthorized)
 			return
 		}
 
@@ -74,7 +71,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			ErrorHandler(w, "An Unexpected Error Occurred. Try Again Later", http.StatusInternalServerError)
 			return
 		}
-		
+
 		http.Redirect(w, r, "/"+userType, http.StatusSeeOther)
 		return
 	} else if r.Method == http.MethodGet {
