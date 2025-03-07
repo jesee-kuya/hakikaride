@@ -14,13 +14,13 @@
             <div class="toggle-buttons">
                 <button class="toggle-btn active" data-form="schoolLogin">School</button>
                 <button class="toggle-btn" data-form="parentLogin">Parent</button>
-                <button class="toggle-btn" data-form="driverLogin">Parent</button>
+                <button class="toggle-btn" data-form="driverLogin">Driver</button>
             </div>
 
             <!-- School Login Form -->
             
             <div class="form-section active" id="schoolLoginForm">
-                <form action="/school" method="POST">
+                <form action="/auth" method="POST">
                     <input type="hidden" name="action" value="login">
                     <input type="hidden" name="userType" value="school">
                     <div class="form-group">
@@ -38,7 +38,7 @@
                 </form>
             </div>
 
-            <div class="form-section active" id="driverLoginForm">
+            <div class="form-section" id="driverLoginForm">
                 <form action="/school" method="POST">
                     <input type="hidden" name="action" value="login">
                     <input type="hidden" name="userType" value="boarding">
@@ -83,6 +83,7 @@
             <div class="toggle-buttons">
                 <button class="toggle-btn active" data-form="school">School</button>
                 <button class="toggle-btn" data-form="parent">Parent</button>
+                <button class="toggle-btn" data-form="driver">Driver</button>
             </div>
 
             <!-- School Signup Form -->
@@ -110,13 +111,17 @@
                 </form>
             </div>
 
-            <div class="form-section active" id="driverForm">
+            <div class="form-section" id="driverForm">
                 <form action="/auth" method="POST">
                     <input type="hidden" name="action" value="signup">
                     <input type="hidden" name="userType" value="driver">
                     <div class="form-group">
                         <label for="schoolName">School Name</label>
                         <input type="text" id="schoolName" name="username"required>
+                    </div>
+                    <div class="form-group">
+                        <label for="driverName">Driver's Full Name</label>
+                        <input type="text" id="driverName" name="username"required>
                     </div>
                     <div class="form-group">
                         <label for="signupSchoolEmail">Email</label>
