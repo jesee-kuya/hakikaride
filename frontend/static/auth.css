@@ -16,6 +16,7 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     width: 90%;
     max-width: 500px;
+    max-height: fit-content;
 }
 
 
@@ -147,7 +148,11 @@ button[type="submit"]:hover {
     display: none;
 }
 
-.form-section.active, .tab-content.active, .tab-content {
+.tab-content {
+    display: none;
+}
+
+.form-section.active, .tab-content.active {
     display: block;
     animation: fadeIn 0.5s ease;
 }
