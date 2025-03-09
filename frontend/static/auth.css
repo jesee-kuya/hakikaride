@@ -1,4 +1,15 @@
-.container {
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full page height */
+}
+
+.auth-page .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background: #ffffff;
     padding: 2rem;
     border-radius: 15px;
@@ -6,6 +17,7 @@
     width: 90%;
     max-width: 500px;
 }
+
 
 .tab-buttons {
     display: flex;
@@ -131,11 +143,11 @@ button[type="submit"]:hover {
     background: #001f30;
 }
 
-.form-section, .tab-content {
+.form-section {
     display: none;
 }
 
-.form-section.active, .tab-content.active {
+.form-section.active, .tab-content.active, .tab-content {
     display: block;
     animation: fadeIn 0.5s ease;
 }
