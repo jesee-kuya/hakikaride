@@ -1,83 +1,3 @@
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    min-height: 100vh;
-    background: #f5f5f5;
-}
-
-.dashboard {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    min-height: 100vh;
-}
-
-.sidebar {
-    background: #003049;
-    padding: 2rem;
-    color: #ffffff;
-}
-
-.school-profile {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.school-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: #fec601;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-}
-
-.nav-links {
-    list-style: none;
-}
-
-.nav-links li {
-    margin-bottom: 1rem;
-}
-
-.nav-links a {
-    color: #ffffff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.8rem;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-}
-
-.nav-links a:hover, .nav-links a.active {
-    background: #fec601;
-    color: #003049;
-}
-
-.main-content {
-    padding: 2rem;
-    overflow-y: auto;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
 .search-container {
     display: flex;
     gap: 1rem;
@@ -90,14 +10,6 @@ body {
     border: 1px solid #c4c4c4;
     border-radius: 5px;
     font-size: 1rem;
-}
-
-.section {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
 }
 
 .grid {
@@ -208,45 +120,10 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-.toggle-btn {
-    display: none;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    background: #003049;
-    color: #ffffff;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1000;
-}
 
-@media screen and (max-width: 768px) {
-    .dashboard {
-        grid-template-columns: 1fr;
-    }
-    
-    .sidebar {
-        position: fixed;
-        left: -250px;
-        top: 0;
-        height: 100vh;
-        transition: left 0.3s ease;
-        z-index: 999;
-    }
-    
-    .sidebar.active {
-        left: 0;
-    }
-    
+@media screen and (max-width: 768px) { 
     .toggle-btn {
         display: block;
-    }
-    
-    .main-content {
-        margin-left: 0;
-        width: 100%;
     }
 
     .search-container {
