@@ -19,7 +19,6 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == http.MethodPost {
 		email := r.FormValue("email")
-		userType := r.FormValue("userType")
 		if isValidEmail(email) {
 			user, err = repositories.GetUserByEmail(email)
 			if err != nil {
@@ -72,7 +71,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		http.Redirect(w, r, "/"+userType, http.StatusSeeOther)
+		http.Redirect(w, r, "/"+user.UserType, http.StatusSeeOther)
 		return
 	} else if r.Method == http.MethodGet {
 		tmpl, err := template.ParseFiles("frontend/templates/sign-in.html")
