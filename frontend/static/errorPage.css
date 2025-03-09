@@ -1,11 +1,3 @@
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
 .error-container {
     padding: 50px;
 }
