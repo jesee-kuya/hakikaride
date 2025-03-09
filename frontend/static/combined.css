@@ -52,17 +52,18 @@ body {
 .nav-links {
     display: flex;
     gap: 2rem;
+    list-style: none;
 }
 
 .nav-links a {
     color: #ffffff;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #FFB800;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 .cta-buttons {
