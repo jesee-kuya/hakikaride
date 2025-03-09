@@ -170,9 +170,12 @@ body {
 
 .feature-card {
     padding: 2rem;
+    border-radius: 10px;
+    background: #f9f9f9;
     text-align: center;
     transition: all 0.3s ease;
 }
+
 
 .feature-icon {
     width: 64px;
