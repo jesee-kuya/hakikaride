@@ -39,7 +39,8 @@
 }
 
 .toggle-btn {
-    background: none;
+    display: none;
+    background: #003049;
     border: none;
     cursor: pointer;
     padding: 1rem;
@@ -50,6 +51,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    z-index: 1000;
 }
 
 .toggle-btn.active {
@@ -74,9 +76,25 @@
 
 .form-group {
     margin-bottom: 1.5rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #003049;
+}
+
+.form-group input {
+    padding: 0.8rem;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
 }
 
 label {
+    width: 100%;
     display: block;
     margin-bottom: 0.5rem;
     color: #003049;
