@@ -1,4 +1,4 @@
-{{ define "authentication" }} 
+{{ define "authentication" }}
 <head>
     <link rel="stylesheet" href="frontend/static/auth.css">
 </head>
@@ -8,7 +8,7 @@
             <button class="tab-btn active" data-tab="login">Login</button>
             <button class="tab-btn" data-tab="signup">Sign Up</button>
         </div>
-
+        
         <!-- Login Section -->
         <div class="tab-content active" id="loginContent">
             <div class="form-section active" id="schoolLoginForm">
@@ -28,25 +28,24 @@
                     <button type="submit">Login</button>
                 </form>
             </div>
-
-
+        </div>
+        
         <!-- Sign Up Section -->
         <div class="tab-content" id="signupContent">
-            <!-- School Signup Form -->
             <div class="form-section active" id="schoolForm">
                 <form action="/auth" method="POST">
                     <input type="hidden" name="action" value="signup">
                     <div class="form-group">
                         <label for="schoolName">Name</label>
-                        <input type="text" id="schoolName" name="username"required>
+                        <input type="text" id="schoolName" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="signupSchoolEmail">Email</label>
                         <input type="email" id="signupSchoolEmail" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="signupSchoolEmail">Phone No</label>
-                        <input type="email" id="signupSchoolEmail" name="phone" required>
+                        <label for="signupPhoneNo">Phone No</label>
+                        <input type="tel" id="signupPhoneNo" name="phone" required>
                     </div>
                     <div class="form-group">
                         <label for="userType">User Type</label>
@@ -74,9 +73,9 @@
                     <button type="submit">Register</button>
                 </form>
             </div>
+        </div>
     </div>
-
     <script src="frontend/static/script.js"></script>
 </body>
 </html>
-{{ end}}
+{{ end }}
