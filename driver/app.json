@@ -1,0 +1,50 @@
+{
+  "expo": {
+    "name": "HakikaRide Driver",
+    "slug": "hakikaride-driver",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "hakikaride-driver",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#FEC601"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.hakikaride.driver",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "HakikaRide Driver uses your location to share your trip position with parents and the school.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "HakikaRide Driver uses your location to share your trip position with parents and the school."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FEC601"
+      },
+      "package": "com.hakikaride.driver",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow HakikaRide Driver to use your location to share your trip position."
+        }
+      ],
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
